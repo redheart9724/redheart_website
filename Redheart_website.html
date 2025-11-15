@@ -1,0 +1,284 @@
+https://webwsp.aps.kuleuven.be/sap/bc/ui5_ui5/sap/zc_ad_appl/*
+https://idp.kuleuven.be/idp/profile/SAML2/POST/SSO?execution=e2s1<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Colorful Portfolio</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #000;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        canvas#matrix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.5;
+        }
+        header {
+            background: linear-gradient(45deg, #ff0066, #00ccff);
+            text-align: center;
+            padding: 3em 1em;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        header p {
+            margin: 0.5em 0;
+            font-size: 1.2em;
+            color: #fff;
+        }
+        nav {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 1em;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        nav a {
+            color: #00ff99;
+            margin: 0 1.5em;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+        nav a:hover {
+            color: #ff00ff;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 2em auto;
+            padding: 0 1em;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            backdrop-filter: blur(5px);
+        }
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5em;
+            padding: 1em;
+        }
+        .gallery img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            border: 2px solid #00ff99;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .gallery img:hover {
+            transform: scale(1.05);
+            border-color: #ff00ff;
+        }
+        .certificates {
+            margin-top: 2em;
+            padding: 1em;
+        }
+        .certificates h2 {
+            color: #00ff99;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        .certificates a {
+            display: block;
+            margin: 0.5em 0;
+            color: #00ccff;
+            text-decoration: none;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+        .certificates a:hover {
+            color: #ff0066;
+        }
+        #contact {
+            margin-top: 2em;
+            padding: 1em;
+        }
+        #contact h2 {
+            color: #00ff99;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+        }
+        #contact p {
+            margin: 0.5em 0;
+        }
+        #contact a {
+            color: #00ccff;
+            text-decoration: none;
+        }
+        #contact a:hover {
+            color: #ff0066;
+        }
+        .contact-form {
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2em;
+            border-radius: 10px;
+            border: 2px solid #00ff99;
+            max-width: 600px;
+            margin: 1em auto;
+        }
+        .contact-form label {
+            display: block;
+            margin: 0.5em 0;
+            color: #00ff99;
+            font-weight: bold;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.5em;
+            margin-bottom: 1em;
+            border: 1px solid #00ccff;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            font-size: 1em;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #ff00ff;
+        }
+        .contact-form button {
+            background: linear-gradient(45deg, #ff0066, #00ccff);
+            color: #fff;
+            padding: 0.8em 1.5em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: transform 0.3s;
+        }
+        .contact-form button:hover {
+            transform: scale(1.05);
+        }
+        footer {
+            background: linear-gradient(45deg, #ff0066, #00ccff);
+            text-align: center;
+            padding: 1em;
+            position: relative;
+            width: 100%;
+            bottom: 0;
+        }
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            nav a {
+                margin: 0 0.5em;
+                font-size: 0.9em;
+            }
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            .contact-form {
+                padding: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <canvas id="matrix"></canvas>
+    <header>
+        <h1> Sunny J </h1>
+        <p>Showcasing my creative work and achievements</p>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#portfolio">Portfolio</a>
+        <a href="#certificates">Certificates</a>
+        <a href="#contact">Contact</a>
+    </nav>
+    <div class="container">
+        <section id="portfolio">
+            <h2>Portfolio</h2>
+            <div class="gallery">
+                <!-- Replace with your image URLs -->
+                <img src="https://via.placeholder.com/300/FF0066/FFFFFF?text=Project+1" alt="Project 1">
+                <img src="https://via.placeholder.com/300/00CCFF/FFFFFF?text=Project+2" alt="Project 2">
+                <img src="https://via.placeholder.com/300/00FF99/FFFFFF?text=Project+3" alt="Project 3">
+            </div>
+        </section>
+        <section id="certificates" class="certificates">
+            <h2>Certificates</h2>
+            <!-- Replace with your certificate URLs or embed PDFs -->
+            <a href="certificate1.pdf" target="_blank">Certificate 1</a>
+            <a href="certificate2.pdf" target="_blank">Certificate 2</a>
+        </section>
+        <section id="contact">
+            <h2>Contact</h2>
+            <p>Email: Sunnyjha62679@gmail.com</p>
+            <p>LinkedIn: <a href="https://www.linkedin.com/in/sunny-j-979544170/">Your Profile</a></p>
+            <div class="contact-form">
+                <form action="https://formspree.io/f/xovwdrjw" method="POST">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                    <label for="organization">Organization</label>
+                    <input type="text" id="organization" name="organization">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="4"></textarea>
+                    <button type="submit">Send Inquiry</button>
+                </form>
+            </div>
+        </section>
+    </div>
+    <footer>
+        <p>© 2025 Sunny J. All rights reserved.</p>
+    </footer>
+    <script>
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+
+        canvas.height = window.innerHeight;
+        canvas.width = window.innerWidth;
+
+        const chars = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const fontSize = 14;
+        const columns = canvas.width / fontSize;
+        const drops = [];
+
+        for (let x = 0; x < columns; x++) {
+            drops[x] = 1;
+        }
+
+        function draw() {
+            ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            ctx.fillStyle = '#00ff99';
+            ctx.font = fontSize + 'px monospace';
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars.charAt(Math.floor(Math.random() * chars.length));
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 33);
+
+        window.addEventListener('resize', () => {
+            canvas.height = window.innerHeight;
+            canvas.width = window.innerWidth;
+        });
+    </script>
+</body>
+</html>
